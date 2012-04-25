@@ -1,0 +1,34 @@
+html
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    height: 100%;
+}
+
+#banner
+{
+    margin-top: 10pt;
+    margin-bottom: 10pt;
+}
+
+.bannerElement
+{
+    display: inline;
+    padding: 5pt;
+    margin-right: 5pt;
+    background-color: #adff2f;
+}
+
+#findLocationForm
+{
+}
+
+#map_canvas
+{
+    height: 100%;
+}
