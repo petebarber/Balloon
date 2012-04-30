@@ -8,4 +8,4 @@ var server = http.createServer(function(req, res)
     });
 
 console.log("Hello, node");
-server.listen(3000, '192.168.0.4');
+server.listen(3000, '127.0.0.1');

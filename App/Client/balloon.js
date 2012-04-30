@@ -1,16 +1,21 @@
 jQuery(function()
 {
     var horsellHighStreetPos = new google.maps.LatLng(51.324873, -0.576696);
-    var startingPos = horsellHighStreetPos;
 
     if (navigator.geolocation)
+    {
         navigator.geolocation.getCurrentPosition(
             function(pos)
             {
-                startingPos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                Init(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            },
+            function()
+            {
+                Init(horsellHighStreetPos);
             });
-
-    Init(startingPos);
+    }
+    else
+        Init(horsellHighStreetPos);
 })
 
 function Init(startingPos)
