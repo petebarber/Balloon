@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d035a0c1-cfca-4475-b12f-b6fb8e081502" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/Server/balloon_server.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Experiments/Simple Node/connect1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Balloon.iml" afterPath="$PROJECT_DIR$/.idea/Balloon.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/Common/common_types.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Experiments/Simple Node/SimpleRESTWS.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Client/balloon.js" afterPath="$PROJECT_DIR$/App/Client/balloon.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Experiments/Simple Node/hellonode.js" afterPath="$PROJECT_DIR$/Experiments/Simple Node/hellonode.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/Server/balloon_server.js" afterPath="$PROJECT_DIR$/App/Server/balloon_server.js" />
     </list>
     <ignored path="Balloon.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +32,7 @@
       <file leaf-file-name="balloon.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App/Client/balloon.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="69" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0">
+            <state line="11" column="58" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -50,7 +50,7 @@
       <file leaf-file-name="auth.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Experiments/Simple Node/auth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="52" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0">
+            <state line="18" column="1" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -59,7 +59,7 @@
       <file leaf-file-name="connect1.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Experiments/Simple Node/connect1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="36" selection-start="0" selection-end="217" vertical-scroll-proportion="0.0">
+            <state line="9" column="16" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -68,16 +68,25 @@
       <file leaf-file-name="balloon_server.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App/Server/balloon_server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="21" selection-start="104" selection-end="104" vertical-scroll-proportion="0.0">
+            <state line="8" column="13" selection-start="212" selection-end="212" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="balloon.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="balloon.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App/Client/balloon.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="97" selection-end="97" vertical-scroll-proportion="0.115384616">
+            <state line="84" column="38" selection-start="2489" selection-end="2489" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common_types.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/App/Common/common_types.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="59" selection-start="159" selection-end="159" vertical-scroll-proportion="0.030411448">
               <folding />
             </state>
           </provider>
@@ -86,7 +95,16 @@
       <file leaf-file-name="hellonode.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Experiments/Simple Node/hellonode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="30" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0">
+            <state line="10" column="33" selection-start="0" selection-end="253" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimpleRESTWS.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Experiments/Simple Node/SimpleRESTWS.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="8" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -108,16 +126,18 @@
         <option value="$PROJECT_DIR$/App/Client/balloon.html" />
         <option value="$PROJECT_DIR$/Experiments/Simple Node/hellonode.js" />
         <option value="$PROJECT_DIR$/Experiments/Simple Node/connect1.js" />
+        <option value="$PROJECT_DIR$/Experiments/Simple Node/SimpleRESTWS.js" />
         <option value="$PROJECT_DIR$/App/Server/balloon_server.js" />
         <option value="$PROJECT_DIR$/App/Client/balloon.js" />
+        <option value="$PROJECT_DIR$/App/Common/common_types.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="28" />
-    <option name="y" value="18" />
-    <option name="width" value="1047" />
-    <option name="height" value="876" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1296" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -241,6 +261,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Balloon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Balloon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="App" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -250,10 +288,26 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="62" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="80" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="76" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="preferences.sourceCode.XML" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="81" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="755" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="751" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="76" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="75" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
@@ -264,6 +318,11 @@
       <method />
     </configuration>
     <configuration default="false" name="connect1.js" type="NodeJSConfigurationType" factoryName="Node JS" temporary="true" path-to-node="C:/Program Files (x86)/nodejs/node" path-to-js-file="$PROJECT_DIR$/Experiments/Simple Node/connect1.js" working-dir="$PROJECT_DIR$" coffeescript-run="false">
+      <RunnerSettings RunnerId="NodeJS.run" />
+      <ConfigurationWrapper RunnerId="NodeJS.run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="SimpleRESTWS.js" type="NodeJSConfigurationType" factoryName="Node JS" temporary="true" path-to-node="C:/Program Files (x86)/nodejs/node" path-to-js-file="$PROJECT_DIR$/Experiments/Simple Node/SimpleRESTWS.js" working-dir="$PROJECT_DIR$" coffeescript-run="false">
       <RunnerSettings RunnerId="NodeJS.run" />
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
@@ -283,10 +342,11 @@
       </JSDebuggerConfigurationSettings>
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Node JS.hellonode.js" />
       <item index="1" class="java.lang.String" itemvalue="Node JS.connect1.js" />
-      <item index="2" class="java.lang.String" itemvalue="Node JS.balloon_server.js" />
+      <item index="2" class="java.lang.String" itemvalue="Node JS.SimpleRESTWS.js" />
+      <item index="3" class="java.lang.String" itemvalue="Node JS.balloon_server.js" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -322,7 +382,15 @@
       <created>1335360942075</created>
       <updated>1335360942075</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="First use of node &amp; fixed geolocation.  It's an async. method which wasn't being handled properly so sync. fall thru always being invoked.">
+      <created>1335793186363</created>
+      <updated>1335793186363</updated>
+    </task>
+    <task id="LOCAL-00004" summary="First use of node &amp; fixed geolocation.  It's an async. method which wasn't being handled properly so sync. fall thru always being invoked.">
+      <created>1335793744638</created>
+      <updated>1335793744638</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -346,17 +414,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="28" y="18" width="1047" height="876" extended-state="0" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.6703911" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26412094" sideWeight="0.7190476" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2809524" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -406,7 +474,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit following re-org of Balloon project" />
+    <option name="LAST_COMMIT_MESSAGE" value="First use of node &amp; fixed geolocation.  It's an async. method which wasn't being handled properly so sync. fall thru always being invoked." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -420,6 +488,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Initial commit following re-org of Balloon project" />
+    <MESSAGE value="First use of node &amp; fixed geolocation.  It's an async. method which wasn't being handled properly so sync. fall thru always being invoked." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -427,43 +496,51 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/App/Client/balloon.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="69" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0" />
+        <state line="11" column="58" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Experiments/QueryLandingTable/query.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="19" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="14" column="19" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Experiments/Simple Node/auth.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="52" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Experiments/Simple Node/hellonode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="30" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0" />
+        <state line="18" column="1" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Experiments/Simple Node/connect1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="36" selection-start="0" selection-end="217" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="9" column="16" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Experiments/Simple Node/hellonode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="33" selection-start="0" selection-end="253" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Experiments/Simple Node/SimpleRESTWS.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="8" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/App/Server/balloon_server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="21" selection-start="104" selection-end="104" vertical-scroll-proportion="0.0">
+        <state line="8" column="13" selection-start="212" selection-end="212" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/App/Client/balloon.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="97" selection-end="97" vertical-scroll-proportion="0.115384616">
+        <state line="84" column="38" selection-start="2489" selection-end="2489" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Common/common_types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="59" selection-start="159" selection-end="159" vertical-scroll-proportion="0.030411448">
           <folding />
         </state>
       </provider>

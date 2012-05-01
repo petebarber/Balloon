@@ -17,11 +17,16 @@ jQuery(function()
     else
         Init(horsellHighStreetPos);
 })
+function getBaseUrl()
+{
+	return "http://batcat:3000/api/";
+}
 
 function Init(startingPos)
 {
     $("#submitLocation")[0].disabled = true;
 
+	var baseURL = getBaseUrl();
     var isSubmitted = false;
     var lastMarker;
 
@@ -71,11 +76,12 @@ function Init(startingPos)
         //this.disabled = true;
         //google.maps.event.removeListener(mapClickListener);
 
-        var sql = "sql=INSERT INTO 1Vjy6Nr22wZgNtmazDhrcf0ngm6H_VposCzIiWV8 (email, Location, Date) VALUES ('foo@bar.com', '', '')";
-        var enSql = encodeURI(sql);
+        //var sql = "sql=INSERT INTO 1Vjy6Nr22wZgNtmazDhrcf0ngm6H_VposCzIiWV8 (email, Location, Date) VALUES ('foo@bar.com', '', '')";
+        //var enSql = encodeURI(sql);
 
-         $.post("https://www.google.com/fusiontables/api/query", enSql,
-             function() { alert("Success"); }).error(function() { alert("Whoops!");  });
+         //$.post("https://www.google.com/fusiontables/api/query", enSql,
+         //    function() { alert("Success"); }).error(function() { alert("Whoops!");  });
         // TODO: Make call to Fusion API
+	     $.post(baseURL + '/balloon', )
      }
 }
