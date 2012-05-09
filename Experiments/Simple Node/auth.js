@@ -11,7 +11,7 @@ function makeHeader(data)
     return hdr;
 }
 
-var data = "Email=email@gmail.com&Passwd=passwd&service=fusiontables&source=test";
+var data = "Email= user@gmail.com&Passwd=password&service=fusiontables&source=test";
 
 console.log("data:" + data);
 

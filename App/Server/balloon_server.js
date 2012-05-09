@@ -1,18 +1,22 @@
 var http = require('http'),
-    connect = require('connect');
+    connect = require('connect'),
+	fs = require('fs'),
+	authWithGoogle = require('./authWithGoogle'),
+	commonTypes = require('../Common/common_types');
+
+function getConfig()
+{
+	var configText = fs.readFileSync("config.json");
+	var config = JSON.parse(configText);
+
+	return config;
+}
 
 function REST(req, res, next)
 {
 	console.log('method:%s, url:%s', req.method, req.url)
 	if (req.method == 'POST' && req.url == '/balloon')
 	{
-		//var sql = "sql=INSERT INTO 1Vjy6Nr22wZgNtmazDhrcf0ngm6H_VposCzIiWV8 (email, Location, Date) VALUES ('foo@bar.com', '', '')";
-		//var enSql = encodeURI(sql);
-
-		//$.post("https://www.google.com/fusiontables/api/query", enSql,
-		//    function() { alert("Success"); }).error(function() { alert("Whoops!");  });
-		// TODO: Make call to Fusion API
-
 		var body = "";
 
 		req.on('data', function(data) { body += data; });
@@ -20,18 +24,44 @@ function REST(req, res, next)
 		{
 			console.log("Post data:" + body);
 
-			res.setHeader('Content-Type', 'application/json');
-			res.end();
+			var balloonFindData = JSON.parse(body);
+
+			authWithGoogle.getAuth(config.email, config.passwd,
+				function(authToken)
+				{
+					console.log("Auth(REST):" + auth);
+
+					// TODO: Check that balloon id is valid.  Return error if not
+
+					var sql = "INSERT INTO 1Pv7rczTgcbKhMYPCrEseg9T-EJVcTtSUXxtTp8U (email, Location, Date) VALUES ("
+							+ "'" + balloonFindData.email + "',"
+							+ "'<Point><coordinates> " + balloonFindData.lng + "," + balloonFindData.lat
+							+ " </coordinates></Point>',"
+							+ "'')";
+
+					authWithGoogle.insert(sql, authToken,
+						function()
+						{
+							res.setHeader('Content-Type', 'application/json');
+							res.end();
+						});
+				},
+				function(e)
+				{
+					next();
+				})
 		});
 	}
 	else
 		next();
 }
 
+var config = getConfig();
+
 var app = connect()
     .use(connect.logger())
-    .use(connect.static('app/client'))
-	.use(connect.static('app/common'))
+    .use(connect.static('client'))
+	.use(connect.static('common'))
     .use('/api', REST);
 
 http.createServer(app).listen(3000);
