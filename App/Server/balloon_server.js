@@ -6,8 +6,10 @@ var http = require('http'),
 
 function getConfig()
 {
-	var configText = fs.readFileSync("config.json");
-	var config = JSON.parse(configText);
+	//var configText = fs.readFileSync("config.json");
+	//var config = JSON.parse(configText);
+
+	config = { email: process.env.jbemail, passwd: process.env.jbpasswd };
 
 	return config;
 }
