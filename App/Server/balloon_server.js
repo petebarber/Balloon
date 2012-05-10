@@ -71,8 +71,8 @@ var config = getConfig();
 
 var app = connect()
     .use(connect.logger())
-    .use(connect.static('App/client'))
-	.use(connect.static('App/common'))
+    .use(connect.static('App/Client'))
+	.use(connect.static('App/Common'))
     .use('/api', REST);
 
 http.createServer(app).listen(process.env.PORT || 3000);
