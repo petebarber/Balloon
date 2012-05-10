@@ -12,7 +12,7 @@ function getConfig()
 	{
 		try
 		{
-			var configText = fs.readFileSync("config.json");
+			var configText = fs.readFileSync("config.json", "utf8");
 			config = JSON.parse(configText);
 		}
 		catch (e)
