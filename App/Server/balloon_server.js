@@ -1,8 +1,7 @@
 var http = require('http'),
     connect = require('connect'),
 	fs = require('fs'),
-	authWithGoogle = require('./authWithGoogle'),
-	commonTypes = require('../Common/common_types');
+	authWithGoogle = require('./authWithGoogle')
 
 function getConfig()
 {
@@ -72,8 +71,8 @@ var config = getConfig();
 
 var app = connect()
     .use(connect.logger())
-    .use(connect.static('client'))
-	.use(connect.static('common'))
+    .use(connect.static('App/client'))
+	.use(connect.static('App/common'))
     .use('/api', REST);
 
-http.createServer(app).listen(3000);
+http.createServer(app).listen(process.env.PORT || 3000);
