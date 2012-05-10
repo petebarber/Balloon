@@ -28,7 +28,8 @@ function getConfig()
 function REST(req, res, next)
 {
 	console.log('method:%s, url:%s', req.method, req.url)
-	if (req.method == 'POST' && req.url == '/balloon')
+	//if (req.method == 'POST' && req.url == '/balloon')
+	if (true)
 	{
 		var body = "";
 
@@ -75,6 +76,6 @@ var app = connect()
     .use(connect.logger())
     .use(connect.static('App/Client'))
 	.use(connect.static('App/Common'))
-    .use('/api', REST);
+    .use(REST);
 
 http.createServer(app).listen(process.env.PORT || 3000);
