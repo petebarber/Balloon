@@ -20,7 +20,7 @@ jQuery(function()
 
 function getBaseUrl()
 {
-	return "http://batcat:3000/api";
+	return "http://firebolt:3000/api";
 }
 
 function Init(startingPos)

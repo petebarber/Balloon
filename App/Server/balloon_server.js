@@ -6,10 +6,20 @@ var http = require('http'),
 
 function getConfig()
 {
-	//var configText = fs.readFileSync("config.json");
-	//var config = JSON.parse(configText);
+	var config = { email: process.env.jbemail, passwd: process.env.jbpasswd };
 
-	config = { email: process.env.jbemail, passwd: process.env.jbpasswd };
+	if (!config.email || !config.passwd)
+	{
+		try
+		{
+			var configText = fs.readFileSync("config.json");
+			config = JSON.parse(configText);
+		}
+		catch (e)
+		{
+			console.log("Couldn't obtain username & password:" + e);
+		}
+	}
 
 	return config;
 }
