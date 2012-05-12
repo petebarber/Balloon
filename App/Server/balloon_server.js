@@ -5,8 +5,6 @@ var http = require('http'),
 
 function getConfig()
 {
-	console.log(process.env);
-
 	var config = { email: process.env.jbemail, passwd: process.env.jbpasswd };
 
 	if (!config.email || !config.passwd)
