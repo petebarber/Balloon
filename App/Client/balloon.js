@@ -20,7 +20,7 @@ jQuery(function()
 
 function getBaseUrl()
 {
-	var baseUrl = location.protocol + "//" + location.hostname + ":" + location.port + "/";
+	var baseUrl = location.protocol + "//" + location.hostname + ":" + location.port;
 	return baseUrl;
 }
 
@@ -106,7 +106,15 @@ function Init(startingPos)
 
 		var y = new BalloonFind(finderEmail, balloonId, x.lat(), x.lng());
 
-        $.post(baseURL + '/api/balloon', JSON.stringify(y), function(){}, 'json');
+        $.post(baseURL + '/api/balloon', JSON.stringify(y), 'json')
+			.success(function()
+			{
+				alert("Thanks for finding a balloon.  Please check your email after 10/6/2012");
+			})
+			.error(function()
+			{
+				alert("Bummer! Something went wrong.  Please try again.");
+			});
 
 		 // TODO: Add success & error handlers.  Error handler has to deal with multiple submissions
 		 // and bad balloon id.
