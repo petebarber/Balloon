@@ -53,18 +53,24 @@ function REST(req, res, next)
 					authWithGoogle.insert(sql, authToken,
 						function()
 						{
-							res.setHeader('Content-Type', 'application/json');
+							res.statusCode = 204; // Success but no content
 							res.end();
-						});
-				},
-				function(e)
-				{
-					next();
+						})
 				})
 		});
 	}
 	else
 		next();
+}
+
+function MakeStop(httpErrorCode)
+{
+	return function(req, res)
+	{
+		res.statusCode = httpErrorCode;
+		res.statusMessage = "Hippos are loose in the computer";
+		res.end();
+	}
 }
 
 var config = getConfig();
@@ -73,6 +79,7 @@ var app = connect()
     .use(connect.logger())
     .use(connect.static('App/Client'))
 	.use(connect.static('App/Common'))
+	//.use(MakeStop(204))
     .use('/api', REST);
 	// TODO: Add .use(myErrorHandler);
 

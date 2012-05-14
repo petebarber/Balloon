@@ -109,15 +109,14 @@ function Init(startingPos)
         $.post(baseURL + '/api/balloon', JSON.stringify(y), 'json')
 			.success(function()
 			{
-				alert("Thanks for finding a balloon.  Please check your email after 10/6/2012");
+				alert("Thanks for finding a balloon.  Please check your email after the 10th of June.");
 			})
-			.error(function()
+			.error(function(e)
 			{
-				alert("Bummer! Something went wrong.  Please try again.");
+				alert("Whoops! Something went wrong:" + e.statusText + "(" + e.status + "). Please try again.");
+				location.reload();
 			});
 
-		 // TODO: Add success & error handlers.  Error handler has to deal with multiple submissions
-		 // and bad balloon id.
 
 		return false;
      }
