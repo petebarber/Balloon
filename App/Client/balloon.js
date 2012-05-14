@@ -106,7 +106,7 @@ function Init(startingPos)
 
 		var y = new BalloonFind(finderEmail, balloonId, x.lat(), x.lng());
 
-        $.post(baseURL + '/balloon', JSON.stringify(y), function(){}, 'json');
+        $.post(baseURL + '/api/balloon', JSON.stringify(y), function(){}, 'json');
 
 		 // TODO: Add success & error handlers.  Error handler has to deal with multiple submissions
 		 // and bad balloon id.
