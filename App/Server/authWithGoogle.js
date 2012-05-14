@@ -8,7 +8,7 @@ exports.getAuth = function(username, password, onsuccess, onerror)
 
 		var options =
 		{
-			host: 'wwwfoo.google.com',
+			host: 'www.google.com',
 			port: 443,
 			path: '/accounts/ClientLogin',
 			method: 'POST',
