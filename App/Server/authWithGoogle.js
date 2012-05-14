@@ -24,7 +24,10 @@ exports.getAuth = function(username, password, onsuccess, onerror)
 			{
 				console.log("statusCode: ", res.statusCode);
 
-				// TODO: Handle non-200 status
+				// TODO: Handle 200
+				// TODO: Handle 403
+				// TODO: Handle capture
+				// TODO: Handle all other codes
 
 				console.log("headers: ", res.headers);
 

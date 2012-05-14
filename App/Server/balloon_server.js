@@ -43,7 +43,9 @@ function REST(req, res, next)
 					console.log("Auth(REST):" + authToken);
 
 					// TODO: Check that balloon id is valid.  Return error if not
+					// TODO: Check that email and balloon have not already been entered.
 
+					// TODO: Add Balloon id (and to table def. as well)
 					var sql = "INSERT INTO 1Pv7rczTgcbKhMYPCrEseg9T-EJVcTtSUXxtTp8U (email, Location, Date) VALUES ("
 							+ "'" + balloonFindData.email + "',"
 							+ "'<Point><coordinates> " + balloonFindData.lng + "," + balloonFindData.lat
