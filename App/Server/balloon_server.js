@@ -73,7 +73,7 @@ var app = connect()
     .use(connect.logger())
     .use(connect.static('App/Client'))
 	.use(connect.static('App/Common'))
-    .use('api', REST);
+    .use('/api', REST);
 	// TODO: Add .use(myErrorHandler);
 
 http.createServer(app).listen(process.env.PORT || 3000);
