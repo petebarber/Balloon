@@ -1,7 +1,7 @@
 var http = require('http'),
-    connect = require('connect'),
+	connect = require('connect'),
 	fs = require('fs'),
-	authWithGoogle = require('./authWithGoogle')
+	authWithGoogle = require('./authWithGoogle');
 
 function getConfig()
 {
@@ -25,7 +25,7 @@ function getConfig()
 
 function REST(req, res, next)
 {
-	console.log('method:%s, url:%s', req.method, req.url)
+	console.log('method:%s, url:%s', req.method, req.url);
 	if (req.method == 'POST' && req.url == '/balloon')
 	{
 		var body = "";
@@ -40,7 +40,7 @@ function REST(req, res, next)
 			authWithGoogle.getAuth(config.email, config.passwd,
 				function(authToken)
 				{
-					console.log("Auth(REST):" + auth);
+					console.log("Auth(REST):" + authToken);
 
 					// TODO: Check that balloon id is valid.  Return error if not
 
@@ -54,6 +54,12 @@ function REST(req, res, next)
 						function()
 						{
 							res.statusCode = 204; // Success but no content
+							res.end();
+						},
+						function()
+						{
+							res.statusCode = 500;
+							res.status = "Unable to update database";
 							res.end();
 						})
 				})

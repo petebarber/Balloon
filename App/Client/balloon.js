@@ -1,22 +1,18 @@
-jQuery(function()
-{
-    var horsellHighStreetPos = new google.maps.LatLng(51.324873, -0.576696);
+jQuery(function () {
+	var horsellHighStreetPos = new google.maps.LatLng(51.324873, -0.576696);
 
-    if (navigator.geolocation)
-    {
-        navigator.geolocation.getCurrentPosition(
-            function(pos)
-            {
-                Init(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            },
-            function()
-            {
-                Init(horsellHighStreetPos);
-            });
-    }
-    else
-        Init(horsellHighStreetPos);
-})
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(
+			function (pos) {
+				Init(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+			},
+			function () {
+				Init(horsellHighStreetPos);
+			});
+	}
+	else
+		Init(horsellHighStreetPos);
+});
 
 function getBaseUrl()
 {
@@ -116,7 +112,6 @@ function Init(startingPos)
 				alert("Whoops! Something went wrong:" + e.statusText + "(" + e.status + "). Please try again.");
 				location.reload();
 			});
-
 
 		return false;
      }
