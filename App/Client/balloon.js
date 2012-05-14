@@ -20,10 +20,8 @@ jQuery(function()
 
 function getBaseUrl()
 {
-	//return "http://firebolt:3000/api";
-	var foo = location.protocol + "//" + location.hostname + ":" + location.port + "/";
-	return foo;
-	//return "fierce-frost-6460.herokuapp.com/api";
+	var baseUrl = location.protocol + "//" + location.hostname + ":" + location.port + "/";
+	return baseUrl;
 }
 
 function Init(startingPos)

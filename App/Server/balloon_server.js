@@ -75,5 +75,6 @@ var app = connect()
     .use(connect.static('App/Client'))
 	.use(connect.static('App/Common'))
     .use(REST);
+	// TODO: Add .use(myErrorHandler);
 
 http.createServer(app).listen(process.env.PORT || 3000);
