@@ -10,27 +10,35 @@
 </head>
 <body>
 	<div id="header">
-		Welcome
+		<h1>Welcome to the Horsell Jubilee Celebration Balloon Release Tracker</h1>
 	</div>
 	<div id="content">
-		<div id="sidebar"></div>
+		<div id="sidebar">
+			Please click on the map to place a marker where you found the balloon.
+			<br/><br/>
+			You can type a postcode or a location name into the 'Find location' box to take you straight there.
+			<br/><br/>
+			Once marked please enter your email address and the balloon number and then press the 'Submit balloon location'
+			button to be in with a chance to win a £25 amazon.co.uk voucher!
+		</div>
 		<div id="mapAll">
 			<div id="banner">
 				<form id="findLocationForm" class="bannerElement">
 					Find location: <input type="text" id="findLocation"/>
 					<input type="submit" value="Locate"/>
 				</form>
+				<div class="bannerElement">
+					<button type="button"/>See all balloon landings</button>
+				</div>
 				<form id="submitLocationForm" class="bannerElement">
 					Email: <input type="text" id="finderEmail"/>
 					Number: <input type="text" id="balloonId"/>
 					<input type="submit" value="Submit balloon location" id="submitLocationButton"/>
 				</form>
-				<div class="bannerElement">
-					<button type="button"/>See all balloon landings</button>
-				</div>
 			</div>
 			<div id="map_canvas"></div>
 		</div>
 	</div>
+Any problems please <a href="mailto:jubballoons@gmail.com">contact</a> us.
 </body>
 </html>
