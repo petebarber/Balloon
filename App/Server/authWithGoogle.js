@@ -19,28 +19,38 @@ exports.getAuth = function(username, password, onsuccess, onerror)
 			}
 		}
 
-		var req = https.request(options, function(res) {
-			console.log("statusCode: ", res.statusCode);
-			console.log("headers: ", res.headers);
+		var req = https.request(options,
+			function(res)
+			{
+				console.log("statusCode: ", res.statusCode);
 
-			res.on('data', function(dataObj) {
-				console.log("Data:" + dataObj);
+				// TODO: Handle 200
+				// TODO: Handle 403
+				// TODO: Handle capture
+				// TODO: Handle all other codes
 
-				var data = dataObj.toString();
+				console.log("headers: ", res.headers);
 
-				auth = data.slice(data.search("Auth=") + 5, data.length);
-				auth = auth.replace(/\n/g, "");
+				res.on('data',
+					function(dataObj)
+					{
+						console.log("Data:" + dataObj);
 
-				onsuccess && onsuccess(auth);
+						var data = dataObj.toString();
+
+						auth = data.slice(data.search("Auth=") + 5, data.length);
+						auth = auth.replace(/\n/g, "");
+
+						onsuccess && onsuccess(auth);
+					});
 			});
-		});
 
-		req.end();
-
-		req.on('error', function(e) {
-			console.error(e);
-			onerror && onerror(e);
-		});
+		req.on('error',
+			function(e)
+			{
+				console.error("getAuth error:" + e);
+				onerror && onerror(e);
+			});
 
 		req.write(data);
 		req.end();
@@ -69,27 +79,32 @@ exports.insert = function(sql, authToken, onsuccess, onerror)
 		}
 	}
 
-	var req = https.request(options, function(res) {
-		console.log("statusCode: ", res.statusCode);
-		console.log("headers: ", res.headers);
+	var req = https.request(options,
+		function(res)
+		{
+			console.log("statusCode: ", res.statusCode);
+			console.log("headers: ", res.headers);
 
-		res.on('data', function(dataObj) {
-			console.log("Data:" + dataObj);
+			// TODO: Handle non-200 status
 
-			onsuccess && onsuccess();
+			res.on('data', function(dataObj)
+			{
+				console.log("Data:" + dataObj);
+
+				onsuccess && onsuccess();
+			});
+
 		});
-	});
 
-	req.end();
-
-	req.on('error', function(e) {
-		console.error(e);
-		onerror && onerror(e);
-	});
+	req.on('error',
+		function(e)
+		{
+			console.error("Insert error:" + e);
+			onerror && onerror(e);
+		});
 
 	req.write(data);
 	req.end();
-
 }
 
 

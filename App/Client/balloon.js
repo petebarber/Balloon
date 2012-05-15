@@ -1,26 +1,23 @@
-jQuery(function()
-{
-    var horsellHighStreetPos = new google.maps.LatLng(51.324873, -0.576696);
+jQuery(function () {
+	var horsellHighStreetPos = new google.maps.LatLng(51.324873, -0.576696);
 
-    if (navigator.geolocation)
-    {
-        navigator.geolocation.getCurrentPosition(
-            function(pos)
-            {
-                Init(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            },
-            function()
-            {
-                Init(horsellHighStreetPos);
-            });
-    }
-    else
-        Init(horsellHighStreetPos);
-})
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(
+			function (pos) {
+				Init(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+			},
+			function () {
+				Init(horsellHighStreetPos);
+			});
+	}
+	else
+		Init(horsellHighStreetPos);
+});
 
 function getBaseUrl()
 {
-	return "http://batcat:3000/api";
+	var baseUrl = location.protocol + "//" + location.hostname + ":" + location.port;
+	return baseUrl;
 }
 
 function Init(startingPos)
@@ -105,10 +102,16 @@ function Init(startingPos)
 
 		var y = new BalloonFind(finderEmail, balloonId, x.lat(), x.lng());
 
-        $.post(baseURL + '/balloon', JSON.stringify(y), function(){}, 'json');
-
-		 // TODO: Add success & error handlers.  Error handler has to deal with multiple submissions
-		 // and bad balloon id.
+        $.post(baseURL + '/api/balloon', JSON.stringify(y), 'json')
+			.success(function()
+			{
+				alert("Thanks for finding a balloon.  Please check your email after the 10th of June.");
+			})
+			.error(function(e)
+			{
+				alert("Whoops! Something went wrong:" + e.statusText + "(" + e.status + "). Please try again.");
+				location.reload();
+			});
 
 		return false;
      }
