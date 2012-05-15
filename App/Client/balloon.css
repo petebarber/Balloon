@@ -10,6 +10,35 @@ body
     height: 100%;
 }
 
+#header
+{
+	border-style: solid;
+	border-width: 5px;
+	margin-bottom: 5px;
+}
+
+#content
+{
+	height: 100%;
+}
+
+#sidebar
+{
+	border-style: solid;
+	border-width: 5px;
+	margin-right: 5px;
+	width: 20%;
+	height: 100%;
+	float: left;
+}
+
+#mapAll
+{
+	border-style: solid;
+	border-width: 5px;
+	margin-right: 5px;
+}
+
 #banner
 {
     margin-top: 10pt;
@@ -30,5 +59,6 @@ body
 
 #map_canvas
 {
-    height: 100%;
+	width: 500px;
+    height: 300px;
 }

@@ -9,20 +9,28 @@
 	<script type="text/javascript" src="balloon.js"></script>
 </head>
 <body>
-	<div id="banner">
-		<form id="findLocationForm" class="bannerElement">
-			Find location: <input type="text" id="findLocation"/>
-			<input type="submit" value="Locate"/>
-		</form>
-		<form id="submitLocationForm" class="bannerElement">
-			Email: <input type="text" id="finderEmail"/>
-			Number: <input type="text" id="balloonId"/>
-			<input type="submit" value="Submit balloon location" id="submitLocationButton"/>
-		</form>
-		<div class="bannerElement">
-			<button type="button"/>See all balloon landings</button>
+	<div id="header">
+		Welcome
+	</div>
+	<div id="content">
+		<div id="sidebar"></div>
+		<div id="mapAll">
+			<div id="banner">
+				<form id="findLocationForm" class="bannerElement">
+					Find location: <input type="text" id="findLocation"/>
+					<input type="submit" value="Locate"/>
+				</form>
+				<form id="submitLocationForm" class="bannerElement">
+					Email: <input type="text" id="finderEmail"/>
+					Number: <input type="text" id="balloonId"/>
+					<input type="submit" value="Submit balloon location" id="submitLocationButton"/>
+				</form>
+				<div class="bannerElement">
+					<button type="button"/>See all balloon landings</button>
+				</div>
+			</div>
+			<div id="map_canvas"></div>
 		</div>
 	</div>
-    <div id="map_canvas"></div>
 </body>
 </html>
