@@ -102,7 +102,14 @@ function Init(startingPos)
 
 		var y = new BalloonFind(finderEmail, balloonId, x.lat(), x.lng());
 
-        $.post(baseURL + '/api/balloon', JSON.stringify(y), 'json')
+        $.ajax(
+			{
+				url : baseURL + '/api/balloon',
+				type : 'POST',
+				data : JSON.stringify(y),
+				dataType: 'json',
+				contentType : "application/json; charset=utf-8",
+	 		})
 			.success(function()
 			{
 				alert("Thanks for finding a balloon.  Please check your email after the 10th of June.");

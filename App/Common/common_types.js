@@ -1,7 +1,7 @@
 function BalloonFind(email, balloonId, lat, lng)
 {
 	this.email = email;
-	this.balloonId = balloonId;
+	this.id = balloonId;
 	this.lat = lat;
 	this.lng = lng;
 }
