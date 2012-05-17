@@ -22,11 +22,20 @@ function getBaseUrl()
 
 function Init(startingPos)
 {
-    $("#submitLocationButton")[0].disabled = true;
-
 	var baseURL = getBaseUrl();
-    var lastMarker;
+	var lastMarker;
 	var isSubmitted = false;
+
+    $("#submitLocationButton")[0].disabled = true;
+	$('#findLocationForm > input[type="submit"]')[0].disabled = true;
+
+	$('#submitLocationForm > input').keyup(UpdateSubmitButton);
+	$("#findLocationForm > input").keyup(
+		function()
+		{
+			$('#findLocationForm > input[type="submit"]')[0].disabled = $("#findLocation").val() == "";
+		});
+
 
 	var myOptions = {
         center: startingPos,
@@ -36,19 +45,21 @@ function Init(startingPos)
 
     var map = new google.maps.Map($("#map_canvas")[0], myOptions);
 
-	var mapClickListener = google.maps.event.addListener(map, 'click', function(evt)
-	{
-		if (lastMarker)
-			lastMarker.setMap(null);
+	var mapClickListener = google.maps.event.addListener(map, 'click',
+		function(evt)
+		{
+			if (lastMarker)
+				lastMarker.setMap(null);
 
-		UpdateEnabledState();
+			lastMarker = new google.maps.Marker({ position: evt.latLng, map: map });
 
-		lastMarker = new google.maps.Marker({ position: evt.latLng, map: map });
+			lastMarker.setTitle("Excellent, you found a balloon here.");
 
-		lastMarker.setTitle("Excellent, you found a balloon here.");
-	})
+			UpdateSubmitButton();
+		});
 
-	$('#findLocationForm')[0].onsubmit = function()
+	$('#findLocationForm')[0].onsubmit =
+		function()
         {
             var geoCodeMap = {};
             geoCodeMap["address"] = $("#findLocation").val();
@@ -67,32 +78,27 @@ function Init(startingPos)
                 });
 
             return false;
-        }
+        };
 
-	function UpdateEnabledState()
+	function UpdateSubmitButton()
 	{
-		var isDisabled;
+		var empty = false;
+		$('#submitLocationForm > input').each(function()
+		{
+			if ($(this).val() == '')
+			{
+				empty = true;
+			}
+		});
 
-		if (isSubmitted == true)
-			isDisabled = true;
-
-		if (isDisabled == undefined && lastMarker == undefined)
-			isDisabled = true;
-
-		if ($('#finderEmail').val() == "")
-			isDisabled = true;
-
-		if ($('#balloonId').val() == "")
-			isDisabled = true;
-
-		if (isDisabled == undefined)
-			isDisabled = false;
-
-		$("#submitLocationButton")[0].disabled = isDisabled;
+		if (empty || isSubmitted || !lastMarker)
+		{
+			$('#submitLocationButton').attr('disabled', true);
+		} else
+		{
+			$('#submitLocationButton').attr('disabled', false);
+		}
 	}
-
-	$("#finderEmail")[0].onchange = function() { UpdateEnabledState();  }
-	$("#balloonId")[0].onchange = function() { UpdateEnabledState();  }
 
 	function validateSubmitLocationForm(finderEmail, balloonId)
 	{
@@ -113,10 +119,11 @@ function Init(startingPos)
 		if (validateSubmitLocationForm(finderEmail, balloonId) == false)
 			return false;
 
-        google.maps.event.removeListener(mapClickListener);
-
 		isSubmitted = true;
-		UpdateEnabledState();
+
+		UpdateSubmitButton();
+
+        google.maps.event.removeListener(mapClickListener);
 
 	    var x = lastMarker.getPosition();
 
