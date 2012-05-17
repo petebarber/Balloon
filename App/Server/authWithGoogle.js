@@ -24,9 +24,16 @@ exports.getAuth = function(username, password, onsuccess, onerror)
 			{
 				console.log("statusCode: ", res.statusCode);
 
+				if (res.statusCode != 200)
+				{
+					console.error("getAuth (failed to auth):" + res.status + " - " + res.statusCode);
+					onerror && onerror();
+					return;
+				}
+
 				// TODO: Handle 200
 				// TODO: Handle 403
-				// TODO: Handle capture
+				// TODO: Handle captcha
 				// TODO: Handle all other codes
 
 				console.log("headers: ", res.headers);
@@ -49,7 +56,7 @@ exports.getAuth = function(username, password, onsuccess, onerror)
 			function(e)
 			{
 				console.error("getAuth error:" + e);
-				onerror && onerror(e);
+				onerror && onerror();
 			});
 
 		req.write(data);
@@ -85,7 +92,12 @@ exports.insert = function(sql, authToken, onsuccess, onerror)
 			console.log("statusCode: ", res.statusCode);
 			console.log("headers: ", res.headers);
 
-			// TODO: Handle non-200 status
+			if (res.statusCode != 200)
+			{
+				console.error("Insert error:" + res.status + " - " + res.statusCode);
+				onerror && onerror();
+				return;
+			}
 
 			res.on('data', function(dataObj)
 			{
@@ -99,8 +111,8 @@ exports.insert = function(sql, authToken, onsuccess, onerror)
 	req.on('error',
 		function(e)
 		{
-			console.error("Insert error:" + e);
-			onerror && onerror(e);
+			console.error("Insert submission error:" + e);
+			onerror && onerror();
 		});
 
 	req.write(data);
