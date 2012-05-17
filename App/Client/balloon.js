@@ -25,10 +25,10 @@ function Init(startingPos)
     $("#submitLocationButton")[0].disabled = true;
 
 	var baseURL = getBaseUrl();
-    var isSubmitted = false;
     var lastMarker;
+	var isSubmitted = false;
 
-    var myOptions = {
+	var myOptions = {
         center: startingPos,
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -40,12 +40,12 @@ function Init(startingPos)
 	{
 		if (lastMarker)
 			lastMarker.setMap(null);
-		else
-			$("#submitLocationButton")[0].disabled = false;
+
+		UpdateEnabledState();
 
 		lastMarker = new google.maps.Marker({ position: evt.latLng, map: map });
 
-		lastMarker.setTitle("Here");
+		lastMarker.setTitle("Excellent, you found a balloon here.");
 	})
 
 	$('#findLocationForm')[0].onsubmit = function()
@@ -69,17 +69,36 @@ function Init(startingPos)
             return false;
         }
 
+	function UpdateEnabledState()
+	{
+		var isDisabled;
+
+		if (isSubmitted == true)
+			isDisabled = true;
+
+		if (isDisabled == undefined && lastMarker == undefined)
+			isDisabled = true;
+
+		if ($('#finderEmail').val() == "")
+			isDisabled = true;
+
+		if ($('#balloonId').val() == "")
+			isDisabled = true;
+
+		if (isDisabled == undefined)
+			isDisabled = false;
+
+		$("#submitLocationButton")[0].disabled = isDisabled;
+	}
+
+	$("#finderEmail")[0].onchange = function() { UpdateEnabledState();  }
+	$("#balloonId")[0].onchange = function() { UpdateEnabledState();  }
+
 	function validateSubmitLocationForm(finderEmail, balloonId)
 	{
-		if (!finderEmail)
+		if (!finderEmail || !balloonId)
 		{
-			alert("Please enter your email address");
-			return false;
-		}
-
-		if (!balloonId)
-		{
-			alert("Please enter the balloon number");
+			alert("Please make your you've entered your email address and the balloon number");
 			return false;
 		}
 
@@ -94,9 +113,10 @@ function Init(startingPos)
 		if (validateSubmitLocationForm(finderEmail, balloonId) == false)
 			return false;
 
-		$("#submitLocationButton")[0].disabled = true;
-
         google.maps.event.removeListener(mapClickListener);
+
+		isSubmitted = true;
+		UpdateEnabledState();
 
 	    var x = lastMarker.getPosition();
 
@@ -108,7 +128,7 @@ function Init(startingPos)
 				type : 'POST',
 				data : JSON.stringify(y),
 				dataType: 'json',
-				contentType : "application/json; charset=utf-8",
+				contentType : "application/json; charset=utf-8"
 	 		})
 			.success(function()
 			{
