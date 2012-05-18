@@ -26,10 +26,13 @@ function Init(startingPos)
 	var lastMarker;
 	var isSubmitted = false;
 
-    $("#submitLocationButton")[0].disabled = true;
+	$("#submitLocationButton")[0].disabled = true;
 	$('#findLocationForm > input[type="submit"]')[0].disabled = true;
 
-	$('#submitLocationForm > input').keyup(UpdateSubmitButton);
+	$('#submitLocationFormDiv  input').keyup(UpdateSubmitButton);
+
+	$('#captchaDiv').keyup(UpdateSubmitButton);
+
 	$("#findLocationForm > input").keyup(
 		function()
 		{
@@ -83,13 +86,17 @@ function Init(startingPos)
 	function UpdateSubmitButton()
 	{
 		var empty = false;
-		$('#submitLocationForm > input').each(function()
-		{
-			if ($(this).val() == '')
+
+		$('#submitLocationFormDiv  input').each(
+			function()
 			{
-				empty = true;
-			}
-		});
+				if ($(this).val() == '')
+				{
+					empty = true;
+				}
+			});
+
+		if (Recaptcha.get_response() == '') empty = true;
 
 		if (empty || isSubmitted || !lastMarker)
 		{
@@ -113,7 +120,11 @@ function Init(startingPos)
 
      $("#submitLocationForm")[0].onsubmit = function()
      {
-		var finderEmail = $("#finderEmail").val();
+		 var a = $('#foo');
+		 var b = $('#foo').val();
+
+
+		 var finderEmail = $("#finderEmail").val();
 		var balloonId = $("#balloonId").val();
 
 		if (validateSubmitLocationForm(finderEmail, balloonId) == false)

@@ -4,7 +4,8 @@
     <title>Map1</title>
     <link rel="stylesheet" href="balloon.css" type="text/css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDGjbM4waAX0OkwiK9YVA3IeVUYFBWrsxM&sensor=false"></script>
+	<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDGjbM4waAX0OkwiK9YVA3IeVUYFBWrsxM&sensor=false"></script>
 	<script type="text/javascript" src="common_types.js"></script>
 	<script type="text/javascript" src="balloon.js"></script>
 </head>
@@ -38,9 +39,18 @@
 					<button type="button"/>See all balloon landings</button>
 				</div>
 				<form id="submitLocationForm" class="bannerElement">
-					Email: <input type="text" id="finderEmail"/>
-					Id: <input type="text" id="balloonId"/>
-					<input type="submit" value="Submit balloon location" id="submitLocationButton"/>
+					<div id="submitLocationFormDiv" style="float: left">
+						<span style="display: block">Email: <input type="text" id="finderEmail"/></span>
+						<span style="display: block">Number: <input type="text" id="balloonId"/></span>
+						<span style="display: block"><input type="submit" value="Submit balloon location" id="submitLocationButton"/></span>
+					</div>
+					<div style="float: right" id="captchaDiv">
+						<script type="text/javascript">
+							Recaptcha.create("6Lf3mtESAAAAAOhimGYt9mcx40yr2W-MSvKScd3G", $('#captchaDiv')[0], {
+								theme: "red",
+								callback: Recaptcha.focus_response_field});
+						</script>
+					</div>
 				</form>
 			</div>
 			<div id="map_canvas"></div>
