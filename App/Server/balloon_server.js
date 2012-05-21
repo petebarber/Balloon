@@ -5,7 +5,12 @@ var http = require('http'),
 
 function getConfig()
 {
-	var config = { email: process.env.jbemail, passwd: process.env.jbpasswd };
+	var config =
+	{
+		email: process.env.jbemail,
+		passwd: process.env.jbpasswd,
+		reCaptchaKey: process.env.reCaptchaKey
+	};
 
 	if (!config.email || !config.passwd)
 	{
@@ -34,7 +39,7 @@ function WriteResponse(res, statusCode, status)
 	res.end();
 }
 
-function Insert(authToken, res, balloonFindData)
+function InsertBalloon(authToken, res, balloonFindData)
 {
 	console.log("Auth(REST):" + authToken);
 
@@ -55,11 +60,21 @@ function Insert(authToken, res, balloonFindData)
 
 function ThrowIfNotValid(balloonFindData)
 {
-	if ((balloonFindData.email	== undefined)	||
-		(balloonFindData.id		== undefined) 	||
-		(balloonFindData.lat	== undefined)	||
-		(balloonFindData.lng	== undefined))
+	if ((balloonFindData.email				== undefined)	||
+		(balloonFindData.id					== undefined) 	||
+		(balloonFindData.lat				== undefined)	||
+		(balloonFindData.lng				== undefined)	||
+		(balloonFindData.captchaChallenge	== undefined)	||
+		(balloonFindData.captchaResponse	== undefined))
 		throw Error("Incomplete balloon find data");
+}
+
+function AuthBalloon(req, res)
+{
+	authWithGoogle.getAuth(config.email, config.passwd,
+		function(auth) { InsertBalloon(auth, res, balloonFindData); },
+		function() { WriteResponse(res, 500, "Failed to login to dB"); }
+	);
 }
 
 function HandleBalloon(req, res)
@@ -68,9 +83,10 @@ function HandleBalloon(req, res)
 
 	ThrowIfNotValid(balloonFindData);
 
-	authWithGoogle.getAuth(config.email, config.passwd,
-		function(auth) { Insert(auth, res, balloonFindData); },
-		function() { WriteResponse(res, 500, "Failed to login to dB"); }
+	authWithGoogle.checkCaptcha(	balloonFindData.captchaChallenge, balloonFindData.captchaResponse,
+									req.connection.remoteAddress, config.reCaptchaKey,
+		function() { AuthBalloon(res, req); },
+		function() { WriteResponse(res, 500, "Bad CAPTCHA"); }
 	);
 }
 

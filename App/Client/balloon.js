@@ -109,9 +109,9 @@ function Init(startingPos)
 
 	function validateSubmitLocationForm(finderEmail, balloonId)
 	{
-		if (!finderEmail || !balloonId)
+		if (!finderEmail || !balloonId || (Recaptcha.get_response() == ''))
 		{
-			alert("Please make your you've entered your email address and the balloon number");
+			alert("Please make your you've entered your email address, balloon number & the CAPTCHA.");
 			return false;
 		}
 
@@ -120,11 +120,10 @@ function Init(startingPos)
 
      $("#submitLocationForm")[0].onsubmit = function()
      {
-		 var a = $('#foo');
-		 var b = $('#foo').val();
+		var a = $('#foo');
+		var b = $('#foo').val();
 
-
-		 var finderEmail = $("#finderEmail").val();
+		var finderEmail = $("#finderEmail").val();
 		var balloonId = $("#balloonId").val();
 
 		if (validateSubmitLocationForm(finderEmail, balloonId) == false)
@@ -138,7 +137,9 @@ function Init(startingPos)
 
 	    var x = lastMarker.getPosition();
 
-		var y = new BalloonFind(finderEmail, balloonId, x.lat(), x.lng());
+		var y = new BalloonFind(finderEmail, balloonId,
+								x.lat(), x.lng(),
+								Recaptcha.get_challenge(), Recaptcha.get_response());
 
         $.ajax(
 			{
