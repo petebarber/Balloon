@@ -28,29 +28,38 @@
 			Please click on the map to place a marker where you found the balloon.
 			<br/><br/>
 			You can type a postcode or a location name into the 'Find location' box to take you straight there.
+			<br/><br/>
+			<div class="bannerElement">
+				<button type="button"/>See all balloon landings</button>
+			</div>
 		</div>
 		<div id="mapAll">
-			<div id="banner">
+			<div id="mapHeader">
+				<table>
+					<tr>
+						<td style="background-color: blue">
+							<form id="submitLocationForm" class="bannerElement">
+								<div>
+									<span style="display:block">Email: <input type="text" id="finderEmail"/></span>
+									<span style="display:block">Number: <input type="text" id="balloonId"/></span>
+									<span style="display:block"><input type="submit" value="Submit balloon location" id="submitLocationButton"/></span>
+								</div>
+							</form>
+						</td>
+						<td style="background-color: blue">
+							<div id="captchaDiv" class="bannerElement">
+								<script type="text/javascript">
+									Recaptcha.create("6LfGudESAAAAAIfjN7qbzd8dF6z8OsuHJxF6SRzA", 'captchaDiv', {
+										theme: "red",
+										callback: Recaptcha.focus_response_field});
+								</script>
+							</div>
+						</td>
+					</tr>
+				</table>
 				<form id="findLocationForm" class="bannerElement">
 					Find location: <input type="text" id="findLocation"/>
 					<input type="submit" value="Locate"/>
-				</form>
-				<div class="bannerElement">
-					<button type="button"/>See all balloon landings</button>
-				</div>
-				<form id="submitLocationForm" class="bannerElement">
-					<div id="submitLocationFormDiv" style="float: left">
-						<span style="display: block">Email: <input type="text" id="finderEmail"/></span>
-						<span style="display: block">Number: <input type="text" id="balloonId"/></span>
-						<span style="display: block"><input type="submit" value="Submit balloon location" id="submitLocationButton"/></span>
-					</div>
-					<div style="float: right" id="captchaDiv">
-						<script type="text/javascript">
-							Recaptcha.create("6LfGudESAAAAAIfjN7qbzd8dF6z8OsuHJxF6SRzA", 'captchaDiv', {
-								theme: "red",
-								callback: Recaptcha.focus_response_field});
-						</script>
-					</div>
 				</form>
 			</div>
 			<div id="map_canvas"></div>

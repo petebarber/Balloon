@@ -38,7 +38,7 @@ body
 	overflow: hidden;
 }
 
-#banner
+#mapHeader
 {
     margin-top: 10pt;
     margin-bottom: 10pt;
@@ -46,10 +46,10 @@ body
 
 .bannerElement
 {
-	float: left;
     padding: 5pt;
     margin: 5pt;
     background-color: #adff2f;
+	display: block;
 }
 
 #findLocationForm
