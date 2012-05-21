@@ -25,40 +25,35 @@ exports.checkCaptcha = function(challenge, response, remoteIp, privateKey, onsuc
 	var req = http.request(options,
 		function(res)
 		{
-			console.log("statusCode: ", res.statusCode);
-
-			if (res.statusCode != 200)
-			{
-				console.error("checkCaptcha (verification failed):" + res.status + " - " + res.statusCode);
-				onerror && onerror();
-				return;
-			}
-
-			console.log("headers: ", res.headers);
+			var data = "";
 
 			res.on('data',
-				function(dataObj)
+				function(chunk)
 				{
-					console.log("Captcha verificaiton response:" + dataObj);
+					data += chunk;
+				});
 
-					var data = dataObj.toString();
-					var lines = data.split('\n');
-					var vLine = lines[0].split(':');
+			res.on('end',
+				function()
+				{
+					console.log("headers: ", res.headers);
+					console.log("statusCode: ", res.statusCode);
 
-					console.log("data:" + data);
-					console.log("lines:" + lines);
-					console.log("vLine:" + vLine);
-					console.log("vLine[0]:" + vLine[0]);
-					console.log("vLine[1]:" + vLine[1]);
-
-					if (vLine[0] == true)
+					if (res.statusCode != 200)
 					{
-						onsuccess && onsuccess();
-					}
-					else
-					{
+						console.error("checkCaptcha (verification failed):" + res.status + " - " + res.statusCode);
 						onerror && onerror();
+						return;
 					}
+
+					console.log("Captcha verificaiton response:" + data);
+
+					var lines = data.split('\n');
+
+					if (lines[0] == "true")
+						onsuccess && onsuccess();
+					else
+						onerror && onerror();
 				});
 		});
 

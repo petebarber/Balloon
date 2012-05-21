@@ -155,7 +155,7 @@ function Init(startingPos)
 			})
 			.error(function(e)
 			{
-				alert("Whoops! Something went wrong:" + e.statusText + "(" + e.status + "). Please try again.");
+				alert("Whoops! Something went wrong: " + e.statusText + " (" + e.status + "). Please try again.");
 				location.reload();
 			});
 

@@ -30,12 +30,7 @@ function getConfig()
 
 function WriteResponse(res, statusCode, status)
 {
-	if (statusCode)
-		res.statusCode = statusCode;
-
-	if (status)
-		res.status = status;
-
+	res.writeHead(statusCode, status);
 	res.end();
 }
 
@@ -69,7 +64,7 @@ function ThrowIfNotValid(balloonFindData)
 		throw Error("Incomplete balloon find data");
 }
 
-function AuthBalloon(req, res)
+function AuthBalloon(res, balloonFindData)
 {
 	authWithGoogle.getAuth(config.email, config.passwd,
 		function(auth) { InsertBalloon(auth, res, balloonFindData); },
@@ -85,8 +80,8 @@ function HandleBalloon(req, res)
 
 	authWithGoogle.checkCaptcha(	balloonFindData.captchaChallenge, balloonFindData.captchaResponse,
 									req.connection.remoteAddress, config.reCaptchaKey,
-		function() { AuthBalloon(res, req); },
-		function() { WriteResponse(res, 500, "Bad CAPTCHA"); }
+		function() { AuthBalloon(res, balloonFindData); },
+		function() { console.log("Bad CAPTCHA"); WriteResponse(res, 500, "Bad CAPTCHA"); }
 	);
 }
 
@@ -115,7 +110,7 @@ var app = connect()
     .use(connect.logger())
     .use(connect.static('App/Client'))
 	.use(connect.static('App/Common'))
-	//.use(MakeStop(204))
+	//.use(MakeStop(450))
 	.use('/api', connect.bodyParser())
 	.use('/api', REST);
 	// TODO: Add .use(myErrorHandler);
