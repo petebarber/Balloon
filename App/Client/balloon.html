@@ -35,19 +35,25 @@
 		</div>
 		<div id="mapAll">
 			<div id="mapHeader">
-				<table>
+				<table style="background-color: #adff2f; width:100%">
 					<tr>
-						<td style="background-color: blue">
-							<form id="submitLocationForm" class="bannerElement">
-								<div>
-									<span style="display:block">Email: <input type="text" id="finderEmail"/></span>
-									<span style="display:block">Number: <input type="text" id="balloonId"/></span>
-									<span style="display:block"><input type="submit" value="Submit balloon location" id="submitLocationButton"/></span>
-								</div>
+						<td>
+							<form id="submitLocationForm">
+								<ol>
+									<li>
+										<label for="finderEmail">Email:</label><input id="finderEmail" type="text"/>
+									</li>
+									<li>
+										<label for="balloonId">Number:</label><input id="balloonId" type="text"/>
+									</li>
+									<li>
+										<input type="submit" value="Submit balloon location" id="submitLocationButton" style="width:100%"/>
+									</li>
+								</ol>
 							</form>
 						</td>
-						<td style="background-color: blue">
-							<div id="captchaDiv" class="bannerElement">
+						<td>
+							<div id="captchaDiv">
 								<script type="text/javascript">
 									Recaptcha.create("6LfGudESAAAAAIfjN7qbzd8dF6z8OsuHJxF6SRzA", 'captchaDiv', {
 										theme: "red",
@@ -57,11 +63,11 @@
 						</td>
 					</tr>
 				</table>
-				<form id="findLocationForm" class="bannerElement">
-					Find location: <input type="text" id="findLocation"/>
-					<input type="submit" value="Locate"/>
-				</form>
 			</div>
+			<form id="findLocationForm" style="background-color: #adff2f">
+				Find location: <input type="text" id="findLocation"/>
+				<input type="submit" value="Locate"/>
+			</form>
 			<div id="map_canvas"></div>
 		</div>
 	</div>
