@@ -109,6 +109,12 @@ function HandleBalloon(req, res)
 {
 	var balloonFindData = req.body;
 
+	if (config.skipCaptcha && config.skipCaptcha == "true")
+	{
+		AuthBalloon(res, balloonFindData);
+		return;
+	}
+
 	ThrowIfNotValid(balloonFindData);
 
 	authWithGoogle.checkCaptcha(	balloonFindData.captchaChallenge, balloonFindData.captchaResponse,

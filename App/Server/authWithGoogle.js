@@ -7,7 +7,7 @@ exports.checkCaptcha = function(challenge, response, remoteIp, privateKey, onsuc
 				"&challenge="	+ encodeURIComponent(challenge) +
 				"&response="	+ encodeURIComponent(response);
 
-	console.log("data:" + data);
+	console.log("checkCapturePostBody:" + data);
 
 	var options =
 	{
@@ -71,7 +71,7 @@ exports.getAuth = function(username, password, onsuccess, onerror)
 
 		var data = "Email=" + username + "&Passwd=" + password +"&service=fusiontables&source=test";
 
-		console.log("data:" + data);
+		console.log("getAuthPostBody" + data);
 
 		var options =
 		{
@@ -108,7 +108,7 @@ exports.getAuth = function(username, password, onsuccess, onerror)
 				res.on('data',
 					function(dataObj)
 					{
-						console.log("Data:" + dataObj);
+						console.log("getAuthRecieveBody" + dataObj);
 
 						var data = dataObj.toString();
 
@@ -131,17 +131,7 @@ exports.getAuth = function(username, password, onsuccess, onerror)
 
 	}
 
-exports.getFusion = function(sql, authToken, onsuccess, onerror)
-{
-	callFusion('GET', sql, authToken, onsuccess, onerror);
-}
-
-exports.postFusion = function(sql, authToken, onsuccess, onerror)
-{
-	callFusion('POST', sql, authToken, onsuccess, onerror);
-}
-
-exports.callFusion = function(method, sql, authToken, onsuccess, onerror)
+callFusion = function(method, sql, authToken, onsuccess, onerror)
 {
 	var https = require('https');
 
@@ -152,6 +142,21 @@ exports.callFusion = function(method, sql, authToken, onsuccess, onerror)
 		path: '/fusiontables/api/query',
 		method: method,
 		headers: { 'Authorization' : 'GoogleLogin auth=' + authToken }
+	}
+
+	var fusionCmd = "sql=" + encodeURI(sql);
+
+	console.log("Fusion Command(" + method + "):" + fusionCmd);
+
+	if (method == 'GET')
+	{
+		options.path += "?";
+		options.path += fusionCmd;
+	}
+	else
+	{
+		options.headers["Content-Type"] 	= "application/x-www-form-urlencoded";
+		options.headers["Content-Length"]	= Buffer.byteLength(fusionCmd, 'utf8');
 	}
 
 	var req = https.request(options,
@@ -166,7 +171,7 @@ exports.callFusion = function(method, sql, authToken, onsuccess, onerror)
 				{
 					console.log("headers: ", res.headers);
 					console.log("statusCode: ", res.statusCode);
-					console.log("data:" + data);
+					console.log("callFusionReceiveBody: *begin*" + data + "*end*");
 
 					if (res.statusCode != 200)
 					{
@@ -174,8 +179,6 @@ exports.callFusion = function(method, sql, authToken, onsuccess, onerror)
 						onerror && onerror();
 						return;
 					}
-
-					console.log("Fusion response:" + data);
 
 					onsuccess && onsuccess(data);
 				});
@@ -185,30 +188,25 @@ exports.callFusion = function(method, sql, authToken, onsuccess, onerror)
 	req.on('error',
 		function(e)
 		{
-			console.error("Insert submission error:" + e);
+			console.error("Fusion submission error:" + e);
 			onerror && onerror();
 		});
 
-	var fusionCmd = "sql=" + sql;
-
-	console.log("Fusion Command(" + method + "):" + fusionCmd);
-
-	if (method == 'GET')
-	{
-		options.path += "?";
-		options.path += fusionCmd;
-	}
-	else
-	{
-		options.headers["Content-Type"] 	= "application/x-www-form-urlencoded";
-		options.headers["Content-Length"]	= Buffer.byteLength(fusionCmd, 'utf8');
+	if (method == 'POST')
 		req.write(fusionCmd);
-	}
 
 	req.end();
 }
 
+exports.getFusion = function(sql, authToken, onsuccess, onerror)
+{
+	callFusion('GET', sql, authToken, onsuccess, onerror);
+}
 
+exports.postFusion = function(sql, authToken, onsuccess, onerror)
+{
+	callFusion('POST', sql, authToken, onsuccess, onerror);
+}
 
 
 
