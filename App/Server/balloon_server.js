@@ -31,10 +31,27 @@ function getConfig()
 	return config;
 }
 
-function WriteResponse(res, statusCode, status)
+function WriteResponse(res, statusCode, opErrorText)
 {
-	res.writeHead(statusCode, status);
-	res.end();
+	var opRes = {};
+
+	if (opErrorText == undefined)
+		opRes.success = true;
+	else
+	{
+		opRes.success = false;
+		opRes.reason = opErrorText;
+	}
+
+	var body = JSON.stringify(opRes);
+
+	res.writeHead(statusCode,
+		{
+			'Content-Length' : body.length,
+			'Content-type' : 'application/json; charset=utf-8'
+		});
+
+	res.end(body);
 }
 
 function InsertBalloon(authToken, res, balloonFindData)
@@ -49,8 +66,8 @@ function InsertBalloon(authToken, res, balloonFindData)
 		+ " </coordinates></Point>')";
 
 	authWithGoogle.postFusion(sql, authToken,
-		function() { WriteResponse(res, 204) },
-		function() { WriteResponse(res, 500, "Unable to update database") });
+		function() { WriteResponse(res, 201) },
+		function() { WriteResponse(res, 200, "Unable to update database") });
 }
 
 function ProceedIfInsertValid(authToken, res, balloonFindData)
@@ -60,28 +77,31 @@ function ProceedIfInsertValid(authToken, res, balloonFindData)
 	authWithGoogle.getFusion(sqlQueryId, authToken,
 		function(fusionData)
 		{
-			// TODO: Check that balloon id is valid.  Return error if not
-			var isValid = true;
+			console.log("FSLen:" + fusionData.split('\n').length)
 
-			if (isValid == true)
+			var foo = fusionData.split('\n');
+			console.log("foo[0]" + foo[0]);
+			console.log("foo[1]" + foo[1]);
+
+			if (fusionData.split('\n').length != 3)
 			{
-				var sqlQueryFound = "SELECT id FROM " + TableT1Id + " WHERE id='" + balloonFindData.id + "'";
-
-				authWithGoogle.getFusion(sqlQueryFound, authToken,
-					function(fusionData)
-					{
-						// TODO: Check that email and balloon have not already been entered.
-						var isFound = false;
-
-						if (isFound == false)
-						{
-							InsertBalloon(authToken, res, balloonFindData);
-							return;
-						}
-					});
+				WriteResponse(res, 200, "This balloon has already been found or doesn't exist");
+				return;
 			}
 
-			WriteResponse(res, 211, "This balloon has already been found or doesn't exist.");
+			var sqlQueryFound = "SELECT id FROM " + TableT1Id + " WHERE id='" + balloonFindData.id + "'";
+
+			authWithGoogle.getFusion(sqlQueryFound, authToken,
+				function(fusionData)
+				{
+					// TODO: Check that email and balloon have not already been entered.
+					var isFound = false;
+
+					if (isFound == false)
+					{
+						InsertBalloon(authToken, res, balloonFindData);
+					}
+				});
 		}
 	);
 }
@@ -90,7 +110,7 @@ function AuthBalloon(res, balloonFindData)
 {
 	authWithGoogle.getAuth(config.email, config.passwd,
 		function(authToken) { ProceedIfInsertValid(authToken, res, balloonFindData); },
-		function() { WriteResponse(res, 500, "Failed to login to dB"); }
+		function() { WriteResponse(res, 200, "Failed to login to dB"); }
 	);
 }
 
@@ -120,7 +140,7 @@ function HandleBalloon(req, res)
 	authWithGoogle.checkCaptcha(	balloonFindData.captchaChallenge, balloonFindData.captchaResponse,
 									req.connection.remoteAddress, config.reCaptchaKey,
 		function() { AuthBalloon(res, balloonFindData); },
-		function() { console.log("Bad CAPTCHA"); WriteResponse(res, 500, "Bad CAPTCHA"); }
+		function() { console.log("Bad CAPTCHA"); WriteResponse(res, 200, "Bad CAPTCHA"); }
 	);
 }
 

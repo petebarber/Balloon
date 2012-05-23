@@ -149,13 +149,11 @@ function Init(startingPos)
 				dataType: 'json',
 				contentType : "application/json; charset=utf-8"
 	 		})
-			.success(function()
+			.success(function(opRes, textStatus)
 			{
-				alert("Thanks for finding a balloon.  Please check your email after the 10th of June.");
-			})
-			.error(function(e)
-			{
-				if (e.statusText == "Bad CAPTCHA")
+				if (opRes.success == true)
+					alert("Thanks for finding a balloon.  Please check your email after the 10th of June.");
+				else if (opRes.reason == "Bad CAPTCHA")
 				{
 					alert("Please try again with the CAPTCHA.");
 					Recaptcha.reload();
@@ -165,8 +163,13 @@ function Init(startingPos)
 				else
 				{
 					location.reload();
-					alert("Whoops! Something went wrong: " + e.statusText + " (" + e.status + "). Please try again.");
+					alert("Whoops! " + opRes.reason + ". Please try again.");
 				}
+			})
+			.error(function(e)
+			{
+				location.reload();
+				alert("Whoops! Something went wrong: " + e.statusText + " (" + e.status + "). Please try again.");
 			});
 
 		return false;
