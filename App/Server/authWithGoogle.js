@@ -27,11 +27,7 @@ exports.checkCaptcha = function(challenge, response, remoteIp, privateKey, onsuc
 		{
 			var data = "";
 
-			res.on('data',
-				function(chunk)
-				{
-					data += chunk;
-				});
+			res.on('data', function(chunk) { data += chunk; });
 
 			res.on('end',
 				function()
@@ -68,7 +64,6 @@ exports.checkCaptcha = function(challenge, response, remoteIp, privateKey, onsuc
 	req.end();
 
 }
-
 
 exports.getAuth = function(username, password, onsuccess, onerror)
 	{
@@ -136,47 +131,54 @@ exports.getAuth = function(username, password, onsuccess, onerror)
 
 	}
 
-exports.insert = function(sql, authToken, onsuccess, onerror)
+exports.getFusion = function(sql, authToken, onsuccess, onerror)
+{
+	callFusion('GET', sql, authToken, onsuccess, onerror);
+}
+
+exports.postFusion = function(sql, authToken, onsuccess, onerror)
+{
+	callFusion('POST', sql, authToken, onsuccess, onerror);
+}
+
+exports.callFusion = function(method, sql, authToken, onsuccess, onerror)
 {
 	var https = require('https');
-
-	var data = "sql=" + sql;
-
-	console.log("data:" + data);
 
 	var options =
 	{
 		host: 'www.google.com',
 		port: 443,
 		path: '/fusiontables/api/query',
-		method: 'POST',
-		headers:
-		{
-			'Content-Type' : 'application/x-www-form-urlencoded',
-			'Authorization' : 'GoogleLogin auth=' + authToken,
-			'Content-Length' : Buffer.byteLength(data, 'utf8')
-		}
+		method: method,
+		headers: { 'Authorization' : 'GoogleLogin auth=' + authToken }
 	}
 
 	var req = https.request(options,
 		function(res)
 		{
-			console.log("statusCode: ", res.statusCode);
-			console.log("headers: ", res.headers);
+			var data = "";
 
-			if (res.statusCode != 200)
-			{
-				console.error("Insert error:" + res.status + " - " + res.statusCode);
-				onerror && onerror();
-				return;
-			}
+			res.on('data', function(chunk) { data += chunk; });
 
-			res.on('data', function(dataObj)
-			{
-				console.log("Data:" + dataObj);
+			res.on('end',
+				function()
+				{
+					console.log("headers: ", res.headers);
+					console.log("statusCode: ", res.statusCode);
+					console.log("data:" + data);
 
-				onsuccess && onsuccess();
-			});
+					if (res.statusCode != 200)
+					{
+						console.error("Fusion error:" + res.status + " - " + res.statusCode);
+						onerror && onerror();
+						return;
+					}
+
+					console.log("Fusion response:" + data);
+
+					onsuccess && onsuccess(data);
+				});
 
 		});
 
@@ -187,7 +189,22 @@ exports.insert = function(sql, authToken, onsuccess, onerror)
 			onerror && onerror();
 		});
 
-	req.write(data);
+	var fusionCmd = "sql=" + sql;
+
+	console.log("Fusion Command(" + method + "):" + fusionCmd);
+
+	if (method == 'GET')
+	{
+		options.path += "?";
+		options.path += fusionCmd;
+	}
+	else
+	{
+		options.headers["Content-Type"] 	= "application/x-www-form-urlencoded";
+		options.headers["Content-Length"]	= Buffer.byteLength(fusionCmd, 'utf8');
+		req.write(fusionCmd);
+	}
+
 	req.end();
 }
 
