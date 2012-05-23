@@ -155,8 +155,18 @@ function Init(startingPos)
 			})
 			.error(function(e)
 			{
-				alert("Whoops! Something went wrong: " + e.statusText + " (" + e.status + "). Please try again.");
-				location.reload();
+				if (e.statusText == "Bad CAPTCHA")
+				{
+					alert("Please try again with the CAPTCHA.");
+					Recaptcha.reload();
+					isSubmitted = false;
+					UpdateSubmitButton();
+				}
+				else
+				{
+					location.reload();
+					alert("Whoops! Something went wrong: " + e.statusText + " (" + e.status + "). Please try again.");
+				}
 			});
 
 		return false;
