@@ -74,17 +74,20 @@ function ProceedIfInsertValid(authToken, res, balloonFindData)
 {
 	var sqlQueryId = "SELECT Id FROM " + TableIdId + " WHERE Id = '" + balloonFindData.id + "'";
 
+	function isValidBalloonId(fusionData) {
+		return fusionData.split('\n').length == 3;
+	}
+
+	function isBalloonAlreadyRegistered(fusionData) {
+		return fusionData.split('\n').length != 2;
+	}
+
 	authWithGoogle.getFusion(sqlQueryId, authToken,
 		function(fusionData)
 		{
-			console.log("FSLen:" + fusionData.split('\n').length)
-
-			var foo = fusionData.split('\n');
-			console.log("foo[0]" + foo[0]);
-			console.log("foo[1]" + foo[1]);
-
-			if (fusionData.split('\n').length != 3)
+			if (isValidBalloonId(fusionData) == false)
 			{
+				console.log("Attempt to register a non-existant balloon:" + balloonFindData.id);
 				WriteResponse(res, 200, "This balloon has already been found or doesn't exist");
 				return;
 			}
@@ -94,13 +97,14 @@ function ProceedIfInsertValid(authToken, res, balloonFindData)
 			authWithGoogle.getFusion(sqlQueryFound, authToken,
 				function(fusionData)
 				{
-					// TODO: Check that email and balloon have not already been entered.
-					var isFound = false;
-
-					if (isFound == false)
+					if (isBalloonAlreadyRegistered(fusionData))
 					{
-						InsertBalloon(authToken, res, balloonFindData);
+						console.log("Attempt to register an already registered balloon:" + balloonFindData.id +
+									", by:" + balloonFindData.email);
+						WriteResponse(res, 200, "This balloon has already been found or doesn't exist");
 					}
+					else
+						InsertBalloon(authToken, res, balloonFindData);
 				});
 		}
 	);
@@ -173,6 +177,5 @@ var app = connect()
 	.use(connect.limit('32kb'))
 	.use('/api', connect.bodyParser())
 	.use('/api', REST);
-	// TODO: Add .use(myErrorHandler);
 
 http.createServer(app).listen(process.env.PORT || 3000);
