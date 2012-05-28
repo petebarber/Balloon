@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6661D3AF-66AA-4F47-8600-29F61959BA2B}</ProjectGuid>
+    <ProjectGuid>{433F618D-F956-40C5-9771-5045CB9C29B0}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodeGen</RootNamespace>
-    <AssemblyName>CodeGen</AssemblyName>
+    <RootNamespace>CheckCode</RootNamespace>
+    <AssemblyName>CheckCode</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
