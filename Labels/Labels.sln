@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test1", "Test1\Test1.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGen", "CodeGen\CodeGen.csproj", "{6661D3AF-66AA-4F47-8600-29F61959BA2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckCode", "CheckCode\CheckCode.csproj", "{433F618D-F956-40C5-9771-5045CB9C29B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +21,10 @@ Global
 		{6661D3AF-66AA-4F47-8600-29F61959BA2B}.Debug|x86.Build.0 = Debug|x86
 		{6661D3AF-66AA-4F47-8600-29F61959BA2B}.Release|x86.ActiveCfg = Release|x86
 		{6661D3AF-66AA-4F47-8600-29F61959BA2B}.Release|x86.Build.0 = Release|x86
+		{433F618D-F956-40C5-9771-5045CB9C29B0}.Debug|x86.ActiveCfg = Debug|x86
+		{433F618D-F956-40C5-9771-5045CB9C29B0}.Debug|x86.Build.0 = Debug|x86
+		{433F618D-F956-40C5-9771-5045CB9C29B0}.Release|x86.ActiveCfg = Release|x86
+		{433F618D-F956-40C5-9771-5045CB9C29B0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
