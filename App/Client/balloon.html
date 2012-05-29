@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Map1</title>
     <link rel="stylesheet" href="balloon.css" type="text/css">
@@ -65,6 +65,10 @@
 				</table>
 			</div>
 			<form id="findLocationForm" style="background-color: #adff2f">
+				<div style="display: inline; position: relative;">
+				<input type="button" value="Where am I?" id="whereami"/>
+				<label id="whereamitooltip" style="z-index:99;display: none; position: absolute; width:400%;left: 10px; top: -100%; background: yellow; padding: 3px; border-radius: 5px">You may be prompted to allow your locatation to be detected</label>
+				</div>
 				Find location: <input type="text" id="findLocation"/>
 				<input type="submit" value="Locate"/>
 			</form>

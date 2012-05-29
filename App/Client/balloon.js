@@ -1,17 +1,7 @@
 jQuery(function () {
 	var horsellHighStreetPos = new google.maps.LatLng(51.324873, -0.576696);
 
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(
-			function (pos) {
-				Init(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-			},
-			function () {
-				Init(horsellHighStreetPos);
-			});
-	}
-	else
-		Init(horsellHighStreetPos);
+	Init(horsellHighStreetPos);
 });
 
 function getBaseUrl()
@@ -38,6 +28,29 @@ function Init(startingPos)
 		{
 			$('#findLocationForm > input[type="submit"]')[0].disabled = $("#findLocation").val() == "";
 		});
+
+	if (navigator.geolocation)
+	{
+		$('#whereami').hover(
+			function() { $('#whereamitooltip').css("display", "inline"); },
+			function() { $('#whereamitooltip').css("display", "none"); }
+		);
+
+		$('#whereami').click(
+			function baz()
+			{
+				navigator.geolocation.getCurrentPosition(
+					function (pos)
+					{
+						var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+
+						map.setCenter(latlng);
+					});
+			}
+		);
+	}
+	else
+		$('#whereami').css("display", "none");
 
 
 	var myOptions = {
