@@ -76,7 +76,7 @@ function Init(startingPos)
 
 	var myOptions = {
         center: startingPos,
-        zoom: 16,
+        zoom: 12, // 16
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
@@ -214,4 +214,20 @@ function Init(startingPos)
 
 		return false;
      }
+
+	$("#landings").click(
+		function()
+		{
+			var layer = new google.maps.FusionTablesLayer({
+				query: {
+					select: 'location',
+					from: '1myy4DmI0thGnAh13X7Y0qAQMuX8fWFajGz0AA6g'
+				},
+
+				styles: [{ markerOptions: { iconName: "large_green" } }]
+			});
+
+			layer.setMap(map);
+		}
+	)
 }
