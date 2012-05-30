@@ -82,18 +82,19 @@ function Init(startingPos)
 
     var map = new google.maps.Map($("#map_canvas")[0], myOptions);
 
-	var mapClickListener = google.maps.event.addListener(map, 'click',
-		function(evt)
-		{
-			if (lastMarker)
-				lastMarker.setMap(null);
+	function BalloonMarkerHandler(evt)
+	{
+		if (lastMarker)
+			lastMarker.setMap(null);
 
-			lastMarker = new google.maps.Marker({ position: evt.latLng, map: map });
+		lastMarker = new google.maps.Marker({ position: evt.latLng, map: map });
 
-			lastMarker.setTitle("Excellent, you found a balloon here.");
+		lastMarker.setTitle("Excellent, you found a balloon here.");
 
-			UpdateSubmitButton();
-		});
+		UpdateSubmitButton();
+	}
+
+	var mapClickListener = google.maps.event.addListener(map, 'click', BalloonMarkerHandler);
 
 	$('#findLocationForm')[0].onsubmit =
 		function()
@@ -139,6 +140,14 @@ function Init(startingPos)
 		{
 			$('#submitLocationButton').attr('disabled', false);
 		}
+	}
+
+	function ReenableFormAfterError()
+	{
+		isSubmitted = false;
+		UpdateSubmitButton();
+		mapClickListener = google.maps.event.addListener(map, 'click', BalloonMarkerHandler);
+
 	}
 
 	function validateSubmitLocationForm(finderEmail, balloonId)
@@ -190,20 +199,17 @@ function Init(startingPos)
 				else if (opRes.reason == "Bad CAPTCHA")
 				{
 					alert("Please try again with the CAPTCHA.");
-					Recaptcha.reload();
-					isSubmitted = false;
-					UpdateSubmitButton();
 				}
 				else
-				{
-					location.reload();
 					alert("Whoops! " + opRes.reason + ". Please try again.");
-				}
+
+				Recaptcha.reload();
+				ReenableFormAfterError();
 			})
 			.error(function(e)
 			{
-				location.reload();
 				alert("Whoops! Something went wrong: " + e.statusText + " (" + e.status + "). Please try again.");
+				ReenableFormAfterError();
 			});
 
 		return false;
