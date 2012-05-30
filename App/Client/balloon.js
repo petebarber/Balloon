@@ -37,14 +37,35 @@ function Init(startingPos)
 		);
 
 		$('#whereami').click(
-			function baz()
+			function()
 			{
 				navigator.geolocation.getCurrentPosition(
-					function (pos)
+					function(pos)
 					{
 						var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 
 						map.setCenter(latlng);
+					}
+					,
+					function(e)
+					{
+						$('#whereami').css("display", "none");
+
+						var t = "";
+
+						switch(e.code)
+						{
+							case e.PERMISSION_DENIED:
+								return;
+							case e.POSITION_UNAVAILABLE:
+								t = "location information is unavailable.";
+								break;
+							case e.TIMEOUT:
+								t = "the request to get user location timed out.";
+								break;
+						}
+
+						alert("I don't where you are as " + t);
 					});
 			}
 		);
