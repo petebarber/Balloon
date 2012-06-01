@@ -163,9 +163,6 @@ function Init(startingPos)
 
      $("#submitLocationForm")[0].onsubmit = function()
      {
-		var a = $('#foo');
-		var b = $('#foo').val();
-
 		var finderEmail = $("#finderEmail").val();
 		var balloonId = $("#balloonId").val();
 
@@ -205,6 +202,7 @@ function Init(startingPos)
 
 				Recaptcha.reload();
 				ReenableFormAfterError();
+				UpdateFoundBalloonCount();
 			})
 			.error(function(e)
 			{
@@ -230,4 +228,27 @@ function Init(startingPos)
 			layer.setMap(map);
 		}
 	)
+
+	function UpdateFoundBalloonCount()
+	{
+		var url = "https://www.google.com/fusiontables/api/query";
+		var sql = "SELECT id FROM 1myy4DmI0thGnAh13X7Y0qAQMuX8fWFajGz0AA6g"  + "&jsonCallback=?";
+		var req = url + "?sql=" + sql;
+
+		$.getJSON(req)
+			.success(function(data)
+			{
+				found = data.table.rows.length;
+
+				$('#found').text(found);
+
+				if (found > 0)
+					$('#landings').removeAttr("disabled");
+				else
+					$('#landings').attr("disabled", "disabled");
+			});
+
+	}
+
+	UpdateFoundBalloonCount();
 }
