@@ -192,7 +192,11 @@ function Init(startingPos)
 			.success(function(opRes, textStatus)
 			{
 				if (opRes.success == true)
+				{
 					alert("Thanks for finding a balloon.  Please check your email after the 10th of June.");
+					UpdateFoundBalloonCount();
+					return;
+				}
 				else if (opRes.reason == "Bad CAPTCHA")
 				{
 					alert("Please try again with the CAPTCHA.");
@@ -202,7 +206,6 @@ function Init(startingPos)
 
 				Recaptcha.reload();
 				ReenableFormAfterError();
-				UpdateFoundBalloonCount();
 			})
 			.error(function(e)
 			{
@@ -220,9 +223,7 @@ function Init(startingPos)
 				query: {
 					select: 'location',
 					from: '1myy4DmI0thGnAh13X7Y0qAQMuX8fWFajGz0AA6g'
-				},
-
-				styles: [{ markerOptions: { iconName: "large_green" } }]
+				}
 			});
 
 			layer.setMap(map);
