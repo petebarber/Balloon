@@ -223,10 +223,11 @@ function Init(startingPos)
 				query: {
 					select: 'location',
 					from: '1myy4DmI0thGnAh13X7Y0qAQMuX8fWFajGz0AA6g'
-				}
+				},
+				map : map
 			});
 
-			layer.setMap(map);
+			//layer.setMap(map);
 		}
 	)
 
